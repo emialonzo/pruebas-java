@@ -4,9 +4,17 @@
         <servlet-name>ServletPersona</servlet-name>
         <servlet-class>servlets.ServletPersona</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletBusqueda</servlet-name>
+        <servlet-class>servlets.ServletBusqueda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletPersona</servlet-name>
         <url-pattern>/persona</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBusqueda</servlet-name>
+        <url-pattern>/buscar/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
