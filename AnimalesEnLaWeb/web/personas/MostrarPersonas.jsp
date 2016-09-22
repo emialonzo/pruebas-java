@@ -13,13 +13,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="<%= request.getContextPath()%>/bower_components/bootstrap/dist/css/bootstrap.css"  rel="stylesheet" type="text/css" />
-        <link href="<%= request.getContextPath()%>/bower_components/bootstrap/dist/css/bootstrap-theme.css"  rel="stylesheet" type="text/css" />
+        <jsp:include page="/templates/csss.jsp" />
     </head>
     <body>
+        <jsp:include page="/templates/header.jsp" />
 
         <h1>Hello World!</h1>
-        
+
         <ol>
             <%
                 List<Persona> list = (List<Persona>) request.getAttribute("personas");
@@ -28,13 +28,12 @@
             <%
                 for (Persona p : list) {
             %>
-            <li><%= p.toString()%> -- ${p}
+            <li><a href="<%= request.getContextPath()%>/persona?comando=verPerfil&idPersona=<%= p.getId()%>"><%= p.toString()%></a> 
             </li>
             <%
                 }
             %>
         </ol>
-        
 
         <ol>
             <c:forEach var="persona" items="${personas}">
@@ -42,7 +41,6 @@
                 </c:forEach>
         </ol>
 
-        <script src="<%= request.getContextPath()%>/bower_components/jquery/dist/jquery.js" type="text/javascript" ></script>
-        <script src="<%= request.getContextPath()%>/bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript" ></script>
+        <jsp:include page="/templates/scripts.jsp" />
     </body>
 </html>
