@@ -33,12 +33,12 @@
                 <li>
                     <form class="form-inline" style="margin-top: 10px; margin-right: 5px;">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="buscar-query" name="fquery" placeholder="Buscar...">
+                            <input type="text" class="form-control" id="buscar-query" name="fquery" placeholder="Buscar..." onblur="buscarAjax()">
                         </div>
                         <button type="button" class="btn btn-default" onclick="buscarAjax()" >Buscar algo</button>
                     </form>
                 </li>
-                <li class="active"><a href="#">Login</a></li>
+                <jsp:include page="/templates/loginfo.jsp"/>        
 
             </ul>
         </div><!--/.nav-collapse -->
