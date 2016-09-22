@@ -23,47 +23,26 @@ import registrameanimal.IControladorPersona;
  */
 public class ServletPersona extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)            throws ServletException, IOException {
+        RequestDispatcher despachador;
         response.setContentType("text/html;charset=UTF-8");
         Factory f = new Factory();
         IControladorPersona icp;
-        icp = f.getIControladorPersona();
-        Collection<Persona> personas = icp.GetPersonas();
-        request.setAttribute("personas", personas);
-        
-        RequestDispatcher despachador = request.getRequestDispatcher("personas/MostrarPersonas.jsp");
-        despachador.forward(request, response);
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet ServletPersona</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet ServletPersona at " + request.getContextPath() + "</h1>");
-//            Factory f = new Factory();
-//            IControladorPersona icp = f.getIControladorPersona();
-//            Collection<Persona> personas = icp.GetPersonas();
-//            out.println("<ol>");
-//            for (Persona persona : personas) {
-//                out.println("<li>" + persona + "</li>" );
-//            }
-//            out.println("</ol>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+
+        String comando = request.getParameter("comando");
+
+        if (comando != null && comando.equals("verPerfil")) {
+            String id = request.getParameter("idPersona");
+            request.setAttribute("persona", id);
+            despachador = request.getRequestDispatcher("personas/ver-perfil.jsp");
+            despachador.forward(request, response);
+        } else {
+            icp = f.getIControladorPersona();
+            Collection<Persona> personas = icp.GetPersonas();
+            request.setAttribute("personas", personas);
+            despachador = request.getRequestDispatcher("personas/MostrarPersonas.jsp");
+            despachador.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

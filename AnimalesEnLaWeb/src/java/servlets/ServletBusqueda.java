@@ -33,7 +33,7 @@ public class ServletBusqueda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String query = request.getParameter("query");
             if(query!= null){
-                out.println(query.toUpperCase());
+                out.println("--->" + query.toUpperCase());
             }
             
         }
