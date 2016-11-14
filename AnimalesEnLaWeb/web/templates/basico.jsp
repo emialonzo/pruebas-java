@@ -10,11 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="csss.jsp" />        
+        <jsp:include page="/templates/csss.jsp" />        
     </head>
     <body>
 
-        <jsp:include page="header.jsp" />
+        <jsp:include page="/templates/header.jsp" />
 
         <div class="container">
 
@@ -51,6 +51,6 @@
             </footer>
 
         </div> <!-- /container -->
-        <jsp:include page="scripts.jsp" />
+        <jsp:include page="/templates/scripts.jsp" />
     </body>
 </html>

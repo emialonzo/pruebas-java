@@ -6,14 +6,17 @@
 package servlets;
 
 import entidades.Persona;
+import generados.InfoPersona;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import registrameanimal.Factory;
 import registrameanimal.IControladorPersona;
 
@@ -26,6 +29,7 @@ public class ServletPersona extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)            throws ServletException, IOException {
         RequestDispatcher despachador;
         response.setContentType("text/html;charset=UTF-8");
+        
         Factory f = new Factory();
         IControladorPersona icp;
 
@@ -37,11 +41,12 @@ public class ServletPersona extends HttpServlet {
             despachador = request.getRequestDispatcher("personas/ver-perfil.jsp");
             despachador.forward(request, response);
         } else {
-            icp = f.getIControladorPersona();
-            Collection<Persona> personas = icp.GetPersonas();
+//            icp = f.getIControladorPersona();
+//            Collection<Persona> personas = icp.GetPersonas();
+            List<InfoPersona> personas = getPeople();
+
             request.setAttribute("personas", personas);
-            despachador = request.getRequestDispatcher("personas/MostrarPersonas.jsp");
-            despachador.forward(request, response);
+            request.getRequestDispatcher("personas/MostrarPersonas.jsp").forward(request, response);
         }
     }
 
@@ -83,5 +88,11 @@ public class ServletPersona extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static java.util.List<generados.InfoPersona> getPeople() {
+        generados.SalutatorService service = new generados.SalutatorService();
+        generados.Salutator port = service.getSalutatorPort();
+        return port.getPeople();
+    }
 
 }
